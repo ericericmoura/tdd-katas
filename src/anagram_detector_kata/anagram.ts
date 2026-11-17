@@ -1,6 +1,6 @@
 export const isAnagram = (a: string, b: string): boolean => {
     if (a === b) return false;
-    if (a.length !== b.length) return false;
+    if (a.replaceAll(" ", "").length !== b.replaceAll(" ", "").length) return false;
     return countLetters(a).join("#") === countLetters(b).join("#");
 };
 
@@ -9,7 +9,7 @@ const countLetters = (a: string): number[] => {
     a = a.replaceAll(" ", "");
     for (const letter of a.toLowerCase()) {
         const code = letter.charCodeAt(0) - 'a'.charCodeAt(0);
-        lettersCount[0]! += code;
+        lettersCount[code]!++;
     }
     return lettersCount;
 }
