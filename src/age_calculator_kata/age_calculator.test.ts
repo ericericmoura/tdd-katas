@@ -12,3 +12,10 @@ test.for([
 ])("should return $expected for someone born in $birthdate at $targetDate", ({ birthdate, targetDate, expected }) => {
     expect(calculateAge(birthdate, targetDate)).toBe(expected);
 })
+
+test.for([
+    { birthdate: "09/09/2017", birthdayWeek: "03/09/2017" },
+    { birthdate: "03/09/2017", birthdayWeek: "28/08/2017" },
+])("should return start of birthday week $expected for someone born in $birthdate", ({ birthdate, birthdayWeek }) => {
+    expect(calculateBirthdayWeek(birthdate)).toBe(birthdayWeek);
+})
