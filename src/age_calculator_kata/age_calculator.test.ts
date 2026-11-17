@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { describe, expect, test } from "vitest";
 import { calculateAge, calculateBirthdayWeek } from "./age_calculator.js";
 
 test.for([
@@ -13,9 +13,14 @@ test.for([
     expect(calculateAge(birthdate, targetDate)).toBe(expected);
 })
 
-test.for([
-    { birthdate: "09/09/2017", birthdayWeek: "03/09/2017" },
-    { birthdate: "03/09/2017", birthdayWeek: "28/08/2017" },
-])("should return start of birthday week $expected for someone born in $birthdate", ({ birthdate, birthdayWeek }) => {
-    expect(calculateBirthdayWeek(birthdate)).toBe(birthdayWeek);
+describe("Calculate birthday week", () => {
+    test.for([
+        { birthdate: "09/09/2017", birthdayWeek: "03/09/2017" },
+        { birthdate: "08/09/2017", birthdayWeek: "03/09/2017" },
+        { birthdate: "07/09/2017", birthdayWeek: "03/09/2017" },
+        { birthdate: "06/09/2017", birthdayWeek: "31/08/2017" },
+        { birthdate: "03/09/2017", birthdayWeek: "28/08/2017" },
+    ])("should return start of birthday week $birthdayWeek for someone born in $birthdate", ({ birthdate, birthdayWeek }) => {
+        expect(calculateBirthdayWeek(birthdate)).toBe(birthdayWeek);
+    })
 })
