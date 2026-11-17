@@ -1,4 +1,5 @@
 import { expect, test } from "vitest";
+import { calculateAge } from "./age_calculator.js";
 
 test.for([
     { birthdate: "18/09/2004", targetDate: "17/11/2026", expected: 22 },
