@@ -8,6 +8,9 @@ test.for([
     { birthdate: "01/01/2004", targetDate: "01/01/2004", expected: 0  },
     { birthdate: "01/01/2004", targetDate: "02/01/2004", expected: 0  },
     { birthdate: "01/01/2004", targetDate: "01/01/2005", expected: 1  },
+    
+    { birthdate: "17/11/2026", targetDate: "18/09/2004", expected: "error" },
+    { birthdate: "01/19/2004", targetDate: "17/11/2026", expected: "error" },
 ])("should return $expected for someone born in $birthdate at $targetDate", ({ birthdate, targetDate, expected }) => {
     expect(calculateAge(birthdate, targetDate)).toBe(expected);
 })
