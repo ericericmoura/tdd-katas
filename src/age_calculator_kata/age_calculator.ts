@@ -1,3 +1,7 @@
+const isLeapYear = (month: number, day: number): boolean => {
+    return month === 2 && day === 29;
+}
+
 export const calculateAge = (birthdate: string, targetDate: string): number => {
     const [birthday , birthmonth , birthyear ] = birthdate .split("/").map(a => Number(a));
     const [targetDay, targetMonth, targetYear] = targetDate.split("/").map(a => Number(a));
@@ -10,7 +14,7 @@ export const calculateAge = (birthdate: string, targetDate: string): number => {
 
     let result: number = targetYear - birthyear;
 
-    if (birthmonth === 2 && birthday === 29) { // leap year
+    if (isLeapYear(birthmonth, birthday)) { 
         if (targetMonth < 3) result--;
     }
 
