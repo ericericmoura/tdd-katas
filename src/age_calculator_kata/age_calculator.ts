@@ -29,11 +29,20 @@ export const calculateAge = (birthdate: string, targetDate: string): number | "e
 }
 
 export const calculateBirthdayWeek = (birthdate: string): string => {
-    const {day: birthday, month: birthmonth, year: birthyear} = parseDateFromString(birthdate);
+    const {day, month, year} = parseDateFromString(birthdate);
 
-    let targetDay   = birthday - 6;    
-    let targetMonth = birthmonth;
-    let targetYear  = birthyear;
+    const date         = new Date(year, month-1, day);
+    const dayOfTheWeek = date.getDay();    
+
+    let numberOfDaysToSubtract = 6;
+
+    if (dayOfTheWeek >= 4) { // Thursday-Saturday
+        numberOfDaysToSubtract = dayOfTheWeek;
+    }
+
+    let targetDay   = day - numberOfDaysToSubtract;    
+    let targetMonth = month;
+    let targetYear  = year;
 
     let diff = Math.abs(targetDay);
 
