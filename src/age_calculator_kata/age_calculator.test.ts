@@ -16,10 +16,12 @@ test.for([
 describe("Calculate birthday week", () => {
     test.for([
         { birthdate: "09/09/2017", birthdayWeek: "03/09/2017" },
+        { birthdate: "03/09/2017", birthdayWeek: "28/08/2017" },
+        { birthdate: "05/09/2017", birthdayWeek: "30/08/2017" },
+        
         { birthdate: "08/09/2017", birthdayWeek: "03/09/2017" },
         { birthdate: "07/09/2017", birthdayWeek: "03/09/2017" },
         { birthdate: "06/09/2017", birthdayWeek: "31/08/2017" },
-        { birthdate: "03/09/2017", birthdayWeek: "28/08/2017" },
     ])("should return start of birthday week $birthdayWeek for someone born in $birthdate", ({ birthdate, birthdayWeek }) => {
         expect(calculateBirthdayWeek(birthdate)).toBe(birthdayWeek);
     })
