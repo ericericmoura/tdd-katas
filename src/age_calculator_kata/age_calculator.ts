@@ -2,15 +2,15 @@ const isLeapYear = (month: number, day: number): boolean => {
     return month === 2 && day === 29;
 }
 
-export const calculateAge = (birthdate: string, targetDate: string): number | "error" => {
-    const [birthday , birthmonth , birthyear ] = birthdate .split("/").map(a => Number(a));
-    const [targetDay, targetMonth, targetYear] = targetDate.split("/").map(a => Number(a));
+const parseDateFromString = (date: string): {day: number, month: number, year: number} => {
+    const [day, month, year] = date.split("/").map(a => Number(a));
+    if (!day || !month || !year) throw new Error(`Invalid date provided: ${date}`);
+    return {day, month, year};
+}
 
-    if (!birthday  || !birthmonth  || !birthyear ||
-        !targetDay || !targetMonth || !targetYear
-    ) {
-        return 0;
-    }
+export const calculateAge = (birthdate: string, targetDate: string): number | "error" => {
+    const {day: birthday , month: birthmonth , year: birthyear } = parseDateFromString(birthdate );
+    const {day: targetDay, month: targetMonth, year: targetYear} = parseDateFromString(targetDate);
 
     const wasBornInFuture = birthyear > targetYear
         || (birthyear === targetYear && birthmonth > targetMonth)
@@ -29,11 +29,7 @@ export const calculateAge = (birthdate: string, targetDate: string): number | "e
 }
 
 export const calculateBirthdayWeek = (birthdate: string): string => {
-    const [birthday, birthmonth, birthyear] = birthdate.split("/").map(a => Number(a));
-
-    if (!birthday || !birthmonth || !birthyear) {
-        return "";
-    }
+    const {day: birthday, month: birthmonth, year: birthyear} = parseDateFromString(birthdate);
 
     let targetDay   = birthday - 6;    
     let targetMonth = birthmonth;
